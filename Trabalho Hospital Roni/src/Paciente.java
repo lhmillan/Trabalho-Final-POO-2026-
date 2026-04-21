@@ -7,10 +7,6 @@ public class Paciente {
     private String nome;
     private Medico medicoResponsavel;
 
-  
-
-  
-
     public Paciente(String cpf, String nome, Medico medicoResponsavel) {
         this.cpf = cpf;
         this.nome = nome;
@@ -27,6 +23,11 @@ public class Paciente {
 
     public Medico getMedicoResponsavel() {
         return medicoResponsavel;
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 
 }
