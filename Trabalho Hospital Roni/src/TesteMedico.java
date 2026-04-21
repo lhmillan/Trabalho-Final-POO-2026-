@@ -19,13 +19,12 @@ public class TesteMedico {
         h1.addMed(m2);
         h1.mostrarMed();
 
-        Atendimento a1 = new Atendimento(m2, p1, TipoAtendimento.CONSULTA, StatusAtendimento.REALIZADO,
-                "Consulta cardiovascular periodica.", LocalDateTime.of(2025, 12, 10, 13, 12), null);
+        Atendimento a1 = new Atendimento(m2, p1, TipoAtendimento.CONSULTA, StatusAtendimento.REALIZADO, "Consulta cardiovascular periodica.", LocalDateTime.of(2025, 12, 10, 13, 12), null);
         Atendimento a2 = new Atendimento(m1, p2, TipoAtendimento.REVISÃO, StatusAtendimento.AGENDADO, "Revisão", null, null);        
-        Fatura f1 = new Fatura(LocalDate.now(), LocalDate.of(2026, 05, 21), StatusFatura.EMANÁLISE, FormaPagamento.DEBITO);
+        Fatura f1 = new Fatura(LocalDate.now(), LocalDate.of(2026, 05, 21), new BigDecimal(6000), StatusFatura.EMANÁLISE, FormaPagamento.DEBITO);
 
-        NotaFiscal nf = new NotaFiscal(h1, p1, new BigDecimal(5420.50), h1, f1);
-        f1.geraNota(nf);
+        NotaFiscal nf = new NotaFiscal(h1, p1, f1, h1, f1);
+        f1.geraNota(nf,f1);
         f1.salvarNota(nf);
         // System.out.println(e1);
         // System.out.println(TipoExame.IMAGEM.getValor());

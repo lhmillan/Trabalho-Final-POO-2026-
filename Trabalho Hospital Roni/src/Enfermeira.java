@@ -1,4 +1,4 @@
-public class Enfermeira {
+public class Enfermeira extends Funcionario{
     private final String cre;
     private String nome;
     private Turno turno;

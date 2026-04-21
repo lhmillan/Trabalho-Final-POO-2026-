@@ -17,18 +17,35 @@ public class Fatura implements Financeiro {
     private BigDecimal valor;
     private List<NotaFiscal> nfs = new ArrayList<>();
     private FormaPagamento pagamento;
-    
 
-    public Fatura(LocalDate dataEmissao, LocalDate dataVenc, StatusFatura statusF, FormaPagamento pagamento) {
+    public Fatura(LocalDate dataEmissao, LocalDate dataVenc, BigDecimal valor, StatusFatura statusF,
+            FormaPagamento pagamento) {
         this.dataEmissao = dataEmissao;
         this.dataVenc = dataVenc;
+        this.valor = valor;
         this.statusF = statusF;
         this.pagamento = pagamento;
 
     }
 
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public LocalDate getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public LocalDate getDataVenc() {
+        return dataVenc;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
     @Override
-    public void geraNota(NotaFiscal nf) {
+    public void geraNota(NotaFiscal nf, Fatura fatura) {
         Random r = new Random();
         int numFat = r.nextInt(1, 999999999);
         DecimalFormat df = new DecimalFormat("0.00");
@@ -40,11 +57,13 @@ public class Fatura implements Financeiro {
 
         JOptionPane.showMessageDialog(null, "NOTA Nº" + nf.getNumero() + "\nPrestador de Serviço: "
                 + nf.getNomeHospital() + "\n\nValores da Nota\n"
-                + "Valor bruto do serviço: R$" + nf.getValor() + "\nISS\nAliquota:3%\nValor:R$ " + df.format(nf.getValor().multiply(iss))
-                + "\n\nPIS\nAlíquota:0,65%\nValor: R$" + df.format(nf.getValor().multiply(pis)) + "\n\nCOFINS\nAlíquota: 3%\n"
-                + "Valor: R$" + df.format(nf.getValor().multiply(cofins)) + "\n\nIPRJ\nAlíquota: 1,2%\n"
-                + "Valor: R$" + df.format(nf.getValor().multiply(irpj)) + "\n\nCSLL\nAlíquota: 1,08%\n"
-                + "Valor: R$" + df.format(nf.getValor().multiply(csll)));
+                + "Valor bruto do serviço: R$" + nf.getValor() + "\nISS\nAliquota:3%\nValor:R$ "
+                + df.format(fatura.getValor().multiply(iss))
+                + "\n\nPIS\nAlíquota:0,65%\nValor: R$" + df.format(fatura.getValor().multiply(pis))
+                + "\n\nCOFINS\nAlíquota: 3%\n"
+                + "Valor: R$" + df.format(fatura.getValor().multiply(cofins)) + "\n\nIPRJ\nAlíquota: 1,2%\n"
+                + "Valor: R$" + df.format(fatura.getValor().multiply(irpj)) + "\n\nCSLL\nAlíquota: 1,08%\n"
+                + "Valor: R$" + df.format(fatura.getValor().multiply(csll)));
     }
 
     @Override
@@ -54,16 +73,13 @@ public class Fatura implements Financeiro {
     }
 
     @Override
-         public void salvarNota(NotaFiscal nf) {
+    public void salvarNota(NotaFiscal nf) {
         nfs.add(nf);
     }
-        public void mostrarNotas(){
-            for (NotaFiscal nf : nfs) {
-                System.out.println(nf);
-            }
-            }
+
+    public void mostrarNotas() {
+        for (NotaFiscal nf : nfs) {
+            System.out.println(nf);
         }
-
- 
-
-
+    }
+}

@@ -8,10 +8,10 @@ public class NotaFiscal {
     private Paciente paciente;
     private DecimalFormat df = new DecimalFormat("0.00");
     private String numero = java.util.UUID.randomUUID().toString().substring(0, 8);;
-    private BigDecimal valor;
+    private Fatura valor;
     private Fatura fatura;
 
-    public NotaFiscal(Hospital nomeHospital, Paciente paciente, BigDecimal valor, Hospital cnpj, Fatura fatura) {
+    public NotaFiscal(Hospital nomeHospital, Paciente paciente, Fatura valor, Hospital cnpj, Fatura fatura) {
         this.nomeHospital = nomeHospital;
         this.paciente = paciente;
         this.valor = valor;
@@ -31,7 +31,7 @@ public class NotaFiscal {
         return paciente;
     }
 
-    public BigDecimal getValor() {
+    public Fatura getValor() {
         return valor;
     }
 
