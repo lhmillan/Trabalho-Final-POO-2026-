@@ -1,4 +1,4 @@
-public class Medico {
+public class Medico extends Funcionario{
 
         private String nome;
         private String especialidade;

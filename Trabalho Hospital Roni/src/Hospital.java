@@ -44,4 +44,11 @@ public class Hospital {
     public String getNome() {
         return nome;
     }
+
+    @Override
+    public String toString() {
+        return cnpj +"\n"+  nome;
+    }
+
+    
 }
