@@ -146,15 +146,16 @@ create table fatura (
 	data_vencimento date not null check (data_vencimento >= data_emissao),
 	status varchar(50) not null check (status in ('pendente','pago','cancelado','em_analise')), -- ENUM: pendente, pago, cancelado, em_analise
 	valor_total decimal(10,2) not null check (valor_total >= 0),
+	plano_saude_id int,
 	forma_pagamento varchar(50),
-	foreign key (paciente_id) references paciente(id)
+	foreign key (paciente_id) references paciente(id),
+	foreign key (plano_saude_id) references plano_saude(id)
 );
 
 create table nota_fiscal (
 	id serial primary key,
 	fatura_id int not null,
 	nome_emissor varchar(100),
-	paciente_id int not null,
 	data_emissao date not null default current_date,
 	descricao_atendimento TEXT,
 	valor_bruto decimal(10,2) not null check (valor_bruto >= 0),
@@ -163,7 +164,6 @@ create table nota_fiscal (
 	iss decimal(10,2) not null check (iss >= 0),
 	irpj decimal(10,2) not null check (irpj >= 0),
 	csll decimal(10,2) not null check (csll >= 0),
-	paciente_nome varchar(100) not null,
 	foreign key (fatura_id) references fatura(id),
 	foreign key (paciente_id) references paciente(id)
 );

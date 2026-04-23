@@ -182,16 +182,17 @@ INSERT INTO exame (paciente_id, laboratorio_id, arquivo_laudo, medico_id, tipo, 
 
 -- 17. Fatura (10 registros)
 -- ENUM STATUS: pendente, pago, cancelado, em_analise
-INSERT INTO fatura (paciente_id, data_emissao, data_vencimento, status, valor_total, forma_pagamento) VALUES
-(1, '2026-04-10', '2026-04-20', 'pendente', 5000.00, 'Boleto'),
-(2, '2026-04-03', '2026-04-10', 'pago', 350.00, 'Cartão de Crédito'),
-(3, '2026-04-05', '2026-04-15', 'pago', 850.00, 'PIX'),
-(4, '2026-04-25', '2026-05-05', 'pendente', 1500.00, 'Boleto'),
-(5, '2026-04-06', '2026-04-16', 'em_analise', 2200.00, 'Plano de Saúde'),
-(6, '2026-04-06', '2026-04-16', 'cancelado', 0.00, NULL),
-(7, '2026-04-08', '2026-04-18', 'pago', 950.00, 'Cartão de Débito'),
-(8, '2026-04-10', '2026-04-20', 'pendente', 8500.00, 'Plano de Saúde'),
-(9, '2026-04-10', '2026-04-20', 'pendente', 450.00, 'PIX'),
-(10, '2026-04-26', '2026-05-06', 'pendente', 600.00, 'Cartão de Crédito');
+INSERT INTO fatura (paciente_id, data_emissao, data_vencimento, status, valor_total, forma_pagamento, plano_saude_id) VALUES
+(1, '2026-04-10', '2026-04-20', 'pendente', 5000.00, 'Boleto', 3),
+(2, '2026-04-03', '2026-04-10', 'pago', 350.00, 'Cartão de Crédito', 4),
+(3, '2026-04-05', '2026-04-15', 'pago', 850.00, 'PIX', 5),
+(4, '2026-04-25', '2026-05-05', 'pendente', 1500.00, 'Boleto', 6),
+(5, '2026-04-06', '2026-04-16', 'em_analise', 2200.00, 'Plano de Saúde', 1),
+(6, '2026-04-06', '2026-04-16', 'cancelado', 0.00, 'Cancelado', 7),
+(7, '2026-04-08', '2026-04-18', 'pago', 950.00, 'Cartão de Débito', 8),
+(8, '2026-04-10', '2026-04-20', 'pendente', 8500.00, 'Plano de Saúde', 2),
+(9, '2026-04-10', '2026-04-20', 'pendente', 450.00, 'PIX', 9),
+(10, '2026-04-26', '2026-05-06', 'pendente', 600.00, 'Cartão de Crédito', 10);
 
 -- A TABELA 'nota_fiscal' FICA VAZIA!
+
