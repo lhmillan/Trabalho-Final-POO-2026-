@@ -1,10 +1,10 @@
 package br.com.serratec.model;
 
-import br.com.serratec.interfaces.Tributavel;
+import br.com.serratec.interfaces.Tributos;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class NotaFiscal implements Tributavel {
+public class NotaFiscal implements Tributos {
 
     private Integer id;
     private String nomeEmissor;
@@ -12,6 +12,9 @@ public class NotaFiscal implements Tributavel {
     private String descricao;
     private BigDecimal valorBruto;
     private Integer faturaId;
+
+    public NotaFiscal() {
+    }
 
     public NotaFiscal(Integer id, String nomeEmissor, LocalDate dataEmissao,
             String descricao, BigDecimal valorBruto, Integer faturaId) {

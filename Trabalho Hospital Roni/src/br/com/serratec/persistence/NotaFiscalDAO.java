@@ -4,6 +4,7 @@ import br.com.serratec.conexao.ConnectionFactory;
 import br.com.serratec.model.NotaFiscal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class NotaFiscalDAO {
@@ -43,7 +44,20 @@ public class NotaFiscalDAO {
         }
     }
 
-    public NotaFiscal buscarPorId(int id) {
-        return null;
+    public ResultSet buscarDados(int faturaId) {
+        String sql = "SELECT p.nome, n.nome_emissor, n.descricao_atendimento, n.valor_bruto, "
+                + "n.iss, n.pis, n.cofins, n.irpj, n.csll "
+                + "FROM nota_fiscal n "
+                + "JOIN fatura f ON n.fatura_id = f.id "
+                + "JOIN paciente p ON f.paciente_id = p.id "
+                + "WHERE n.fatura_id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, faturaId);
+            return stmt.executeQuery();
+        } catch (SQLException e) {
+            System.err.println("Erro ao buscar dados para CSV: " + e.getMessage());
+            return null;
+        }
     }
 }

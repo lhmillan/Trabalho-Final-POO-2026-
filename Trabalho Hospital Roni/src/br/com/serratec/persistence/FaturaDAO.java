@@ -1,12 +1,12 @@
 package br.com.serratec.persistence;
 
 import br.com.serratec.conexao.ConnectionFactory;
+import br.com.serratec.model.Atendimento;
 import br.com.serratec.model.Fatura;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 
 public class FaturaDAO {
 
@@ -18,7 +18,7 @@ public class FaturaDAO {
 
     public Fatura buscarPorId(int id) {
 
-        String sql = "SELECT * FROM fatura WHERE id = ?";
+        String sql = "SELECT * FROM fatura WHERE id = ? and status = 'pago' ";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
@@ -33,7 +33,9 @@ public class FaturaDAO {
                         rs.getDate("data_emissao").toLocalDate(),
                         rs.getDate("data_vencimento").toLocalDate(),
                         rs.getString("status"),
-                        rs.getBigDecimal("valor_total")
+                        rs.getBigDecimal("valor_total"),
+                        rs.getInt("plano_saude_id"),
+                        rs.getString("forma_pagamento")
                 );
             }
 
